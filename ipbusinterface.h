@@ -139,12 +139,12 @@ private:
 				   case   configurationRead:
 					   if (j + nWords >= responseSize) { //response too short to contain nWords values
 						   nWords = quint8(responseSize - j - 1);
-						   for (quint8 i=0; i<nWords; ++i) data[i] = response[++j];
+                           if( data != nullptr) for (quint8 i=0; i<nWords; ++i) data[i] = response[++j];
 						   emit successfulRead(nWords);
 						   emit IPbusError("read transaction truncated");
 						   return false;
 					   } else {
-                           if( data != nullptr)for (quint8 i=0; i<nWords; ++i) data[i] = response[++j];
+                           if( data != nullptr) for (quint8 i=0; i<nWords; ++i) data[i] = response[++j];
 						   emit successfulRead(nWords);
 					   }
 					   break;
